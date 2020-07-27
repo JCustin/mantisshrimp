@@ -1,0 +1,1398 @@
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for Mantisshrimp.">
+      
+      
+        <link rel="canonical" href="https://lgvaz.github.io/mantisshrimp/advanced_guide/">
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.0">
+    
+    
+      
+        <title>Advanced Guide - Mantisshrimp</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.b5d04df8.min.css">
+      
+        <link rel="stylesheet" href="../assets/stylesheets/palette.9ab2c1f8.min.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#2196f3">
+      
+    
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#building-a-custom-parser-and-a-custom-model" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://lgvaz.github.io/mantisshrimp/" title="Mantisshrimp" class="md-header-nav__button md-logo" aria-label="Mantisshrimp">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            Mantisshrimp
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Advanced Guide
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/lgvaz/Mantisshrimp" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+        
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://lgvaz.github.io/mantisshrimp/" title="Mantisshrimp" class="md-nav__button md-logo" aria-label="Mantisshrimp">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    Mantisshrimp
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/lgvaz/Mantisshrimp" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../install/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../docker/" title="Docker" class="md-nav__link">
+      Docker
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Tutorials
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../getting_started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../custom_parser/" title="Custom Parser" class="md-nav__link">
+      Custom Parser
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Advanced Guide
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"/></svg>
+        </span>
+      </label>
+    
+    <a href="./" title="Advanced Guide" class="md-nav__link md-nav__link--active">
+      Advanced Guide
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#goal" class="md-nav__link">
+    Goal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    Install
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting started
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#imports" class="md-nav__link">
+    Imports
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-the-data" class="md-nav__link">
+    Loading the data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parser" class="md-nav__link">
+    Parser
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mantisshrimp-eliminates-boilerplate-for-you-" class="md-nav__link">
+    Mantisshrimp eliminates boilerplate for you :-)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transforms" class="md-nav__link">
+    Transforms
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datasets" class="md-nav__link">
+    Datasets
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model" class="md-nav__link">
+    Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backbones" class="md-nav__link">
+    Backbones
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mantisshrimp-engines" class="md-nav__link">
+    Mantisshrimp Engines
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-using-fastai" class="md-nav__link">
+    Training Using Fastai
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataloader" class="md-nav__link">
+    DataLoader
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-using-pytorch-lightning" class="md-nav__link">
+    Training using PyTorch Lightning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saving-the-model" class="md-nav__link">
+    Saving the Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-predictions" class="md-nav__link">
+    Making Predictions
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Examples
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Examples" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Examples
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../examples/training_using_fastai/" title="Training using Fastai" class="md-nav__link">
+      Training using Fastai
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../deployment/" title="Deployment" class="md-nav__link">
+      Deployment
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../contributing/" title="Contributing Guide" class="md-nav__link">
+      Contributing Guide
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../readme_mkdocs/" title="Generating Docs" class="md-nav__link">
+      Generating Docs
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Preferences
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M8.59 16.58L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.42z"/></svg>
+      </span>
+    </label>
+    <nav class="md-nav" aria-label="Preferences" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        <span class="md-nav__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        </span>
+        Preferences
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../changing-the-colors/" title="Changing the colors" class="md-nav__link">
+      Changing the colors
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../about/" title="About" class="md-nav__link">
+      About
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#goal" class="md-nav__link">
+    Goal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install" class="md-nav__link">
+    Install
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    Getting started
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting started">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#imports" class="md-nav__link">
+    Imports
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loading-the-data" class="md-nav__link">
+    Loading the data
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parser" class="md-nav__link">
+    Parser
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mantisshrimp-eliminates-boilerplate-for-you-" class="md-nav__link">
+    Mantisshrimp eliminates boilerplate for you :-)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transforms" class="md-nav__link">
+    Transforms
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datasets" class="md-nav__link">
+    Datasets
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model" class="md-nav__link">
+    Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#backbones" class="md-nav__link">
+    Backbones
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mantisshrimp-engines" class="md-nav__link">
+    Mantisshrimp Engines
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-using-fastai" class="md-nav__link">
+    Training Using Fastai
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dataloader" class="md-nav__link">
+    DataLoader
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-using-pytorch-lightning" class="md-nav__link">
+    Training using PyTorch Lightning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#saving-the-model" class="md-nav__link">
+    Saving the Model
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#making-predictions" class="md-nav__link">
+    Making Predictions
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  
+                
+                
+                <p><a href="https://colab.research.google.com/github/lgvaz/mantisshrimp/blob/master/notebooks/advanced_guide.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+<h1 id="building-a-custom-parser-and-a-custom-model">Building a Custom Parser and a Custom Model</h1>
+<h2 id="goal">Goal</h2>
+<p>In this book, we will show how to:</p>
+<ul>
+<li>Create a custom Parser: we are using the Wheat example for the <a href="https://www.kaggle.com/c/global-wheat-detection">Kaggle Global Wheat Competition</a></li>
+<li>Train the model using Fastai library</li>
+<li>Train the model using Pytorch-Lightning library</li>
+<li>Use a custom backbone</li>
+<li>Save a trained model</li>
+<li>Make predictions using our Inference API</li>
+</ul>
+<h2 id="install">Install</h2>
+<ul>
+<li>Simple have Pytorch and get this from GitHub (release on PyPi to be soon)</li>
+</ul>
+<div class="highlight"><pre><span></span><code>pip install -r requirements.txt
+pip install git+git://github.com/lgvaz/mantisshrimp.git
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="s1">&#39;git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI&#39;</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">fastai2</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">q</span> <span class="n">pytorch_lightning</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="err">!</span> <span class="n">pip</span> <span class="o">-</span><span class="n">q</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">git</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">lgvaz</span><span class="o">/</span><span class="n">mantisshrimp</span><span class="o">.</span><span class="n">git</span>
+</code></pre></div>
+
+<h2 id="getting-started">Getting started</h2>
+<h3 id="imports">Imports</h3>
+<p>Mantisshrimp is built in such a way that is safe to use wildcard imports, .e.g. <code>from mantisshrimp import *.</code></p>
+<p><code>from mantisshrimp.imports import *</code> will import commonly used packages like np and plt.</p>
+<p><code>from mantisshrimp import *</code> will import all mantis modules needed for development.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">mantisshrimp.imports</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">mantisshrimp</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">albumentations</span> <span class="k">as</span> <span class="nn">A</span>
+</code></pre></div>
+
+<h2 id="loading-the-data">Loading the data</h2>
+<ul>
+<li>
+<p>The first step is to understand the data. In this task we were given a .csv file with annotations, let's take a look at that.</p>
+</li>
+<li>
+<p>Note:</p>
+</li>
+<li>
+<p>Replace source with your own path for the dataset directory.</p>
+</li>
+</ul>
+<h2 id="parser">Parser</h2>
+<ul>
+<li>To process the data into format feedable to the models we need to create a parser.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;../input/global-wheat-detection/&#39;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="s2">&quot;train.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<div class="k-default-codeblock">
+<div class="highlight"><pre><span></span><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre></div>
+</div>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>image_id</th>
+      <th>width</th>
+      <th>height</th>
+      <th>bbox</th>
+      <th>source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>b6ab77fd7</td>
+      <td>1024</td>
+      <td>1024</td>
+      <td>[834.0, 222.0, 56.0, 36.0]</td>
+      <td>usask_1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b6ab77fd7</td>
+      <td>1024</td>
+      <td>1024</td>
+      <td>[226.0, 548.0, 130.0, 58.0]</td>
+      <td>usask_1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>b6ab77fd7</td>
+      <td>1024</td>
+      <td>1024</td>
+      <td>[377.0, 504.0, 74.0, 160.0]</td>
+      <td>usask_1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>b6ab77fd7</td>
+      <td>1024</td>
+      <td>1024</td>
+      <td>[834.0, 95.0, 109.0, 107.0]</td>
+      <td>usask_1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>b6ab77fd7</td>
+      <td>1024</td>
+      <td>1024</td>
+      <td>[26.0, 144.0, 124.0, 117.0]</td>
+      <td>usask_1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>At first glance, we can make the following assumptions:</p>
+<ul>
+<li>Multiple rows with the same object_id, width, height</li>
+<li>A different bbox for each row</li>
+<li>
+<p>source doesn't seem relevant right now</p>
+</li>
+<li>
+<p>Once we know what our data provides we can create our custom Parser.</p>
+</li>
+<li>
+<p>When creating a Parser we inherit from smaller building blocks that provides the functionallity we want:</p>
+</li>
+<li>
+<p>DefaultImageInfoParser: Will parse standard fields for image information, e.g. filepath, height, width</p>
+</li>
+<li>FasterRCNNParser: Since we only need to predict bboxes we will use a FasterRCNN model, this will parse all the requirements for using such a model.</li>
+</ul>
+<p>We can also specify exactly what fields we would like to parse, in fact, the parsers we are currently using are just helper classes that groups a collection of individual parsers.</p>
+<p>We are going to see how to use individual parsers in a future tutorial.</p>
+<p>Defining the <strong>init</strong> is completely up to you, normally we have to pass our data (the df in our case) and the folder where our images are contained (source in our case).</p>
+<p>We then override <strong>iter</strong>, telling our parser how to iterate over our data. In our case we call df.itertuples to iterate over all df rows.</p>
+<p><strong>len</strong> is not obligatory but will help visualizing the progress when parsing.</p>
+<p>And finally we override all the other methods, they all receive a single argument o, which is the object returned by <strong>iter</strong>.</p>
+<p>Now we just need to decide how to split our data and Parser.parse!</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">WheatParser</span><span class="p">(</span><span class="n">DefaultImageInfoParser</span><span class="p">,</span> <span class="n">FasterRCNNParser</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">source</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">source</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imageid_map</span> <span class="o">=</span> <span class="n">IDMap</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">itertuples</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">imageid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">imageid_map</span><span class="p">[</span><span class="n">o</span><span class="o">.</span><span class="n">image_id</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">filepath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">o</span><span class="o">.</span><span class="n">image_id</span><span class="si">}</span><span class="s2">.jpg&quot;</span>
+
+    <span class="k">def</span> <span class="nf">height</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">o</span><span class="o">.</span><span class="n">height</span>
+
+    <span class="k">def</span> <span class="nf">width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">o</span><span class="o">.</span><span class="n">width</span>
+
+    <span class="k">def</span> <span class="nf">labels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">bboxes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BBox</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">BBox</span><span class="o">.</span><span class="n">from_xywh</span><span class="p">(</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">bbox</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">))]</span>
+</code></pre></div>
+
+<h2 id="mantisshrimp-eliminates-boilerplate-for-you-">Mantisshrimp eliminates boilerplate for you :-)</h2>
+<ul>
+<li>It creates a RandomSpitter which divides data into trainand test.</li>
+<li>Then we create the parser and simply parse the data</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">data_splitter</span> <span class="o">=</span> <span class="n">RandomSplitter</span><span class="p">([</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">WheatParser</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">source</span> <span class="o">/</span> <span class="s2">&quot;train&quot;</span><span class="p">)</span>
+<span class="n">train_rs</span><span class="p">,</span> <span class="n">valid_rs</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">data_splitter</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="k-default-codeblock">
+<div class="highlight"><pre><span></span><code>HBox(children=(FloatProgress(value=0.0, max=147793.0), HTML(value=&#39;&#39;)))
+</code></pre></div>
+</div>
+
+<p>Let's take a look at one record.</p>
+<div class="highlight"><pre><span></span><code><span class="n">show_record</span><span class="p">(</span><span class="n">train_rs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+
+<p><img alt="png" src="../images/advanced_guide/advanced_guide_21_0.png" /></p>
+<h2 id="transforms">Transforms</h2>
+<p>Mantisshrimp is agnostic to the transform library you want to use. We provide default support for albumentations but if you want to use another library you just need to inherit and override all abstract methods of Transform.</p>
+<p>For simplicity, let's use a single transform on the train data and no transforms on the validation data.</p>
+<div class="highlight"><pre><span></span><code><span class="n">train_tfm</span> <span class="o">=</span> <span class="n">AlbuTransform</span><span class="p">([</span><span class="n">A</span><span class="o">.</span><span class="n">Flip</span><span class="p">()])</span>
+</code></pre></div>
+
+<h2 id="datasets">Datasets</h2>
+<ul>
+<li>This is equivalent to PyTorch datasets that we use always.</li>
+<li>For creating a Dataset we just need need to pass the parsed records from the previous step and optionally a transform.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">train_ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">train_rs</span><span class="p">,</span> <span class="n">train_tfm</span><span class="p">)</span>
+<span class="n">valid_ds</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="n">valid_rs</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="model">Model</h2>
+<ul>
+<li>It uses the torchvision implementation of Faster RCNN which most people are using here.</li>
+<li>Best part, we can try Faster RCNN with multiple Backbones, and its hardly any line of code.</li>
+<li>It allows flexible model implementation coz we don't want to limit the library</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">mantisshrimp.models.rcnn.faster_rcnn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">mantisshrimp.models.rcnn</span> <span class="kn">import</span> <span class="o">*</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Using the FasterRCNN Basic Model with resnet50 fpn backbone</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">faster_rcnn</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="k-default-codeblock">
+<div class="highlight"><pre><span></span><code>Downloading: &quot;https://download.pytorch.org/models/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth&quot; to /root/.cache/torch/checkpoints/fasterrcnn_resnet50_fpn_coco-258fb6c6.pth
+
+HBox(children=(FloatProgress(value=0.0, max=167502836.0), HTML(value=&#39;&#39;)))
+</code></pre></div>
+</div>
+
+<h2 id="backbones">Backbones</h2>
+<ul>
+<li><a href="https://github.com/lgvaz/mantisshrimp/tree/master/mantisshrimp/backbones">Backbones</a> define which CNN is being used as feature extractor or base of the model.</li>
+<li>Mantisshrimp supports all torchvision CNN models as well models from PyTorch Image models by ross wightman.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">mantisshrimp</span> <span class="kn">import</span> <span class="n">backbones</span>
+</code></pre></div>
+
+<ul>
+<li>It supports many resnet models with fpn on top of it.</li>
+<li>
+<p>You can use pretrained imagenet Backbones as well.</p>
+</li>
+<li>
+<p>Is supports <a href="https://github.com/lgvaz/mantisshrimp/tree/master/mantisshrimp/backbones">backbones</a> "resnet18", "resnet34","resnet50", "resnet101", "resnet152", "resnext50_32x4d", "resnext101_32x8d", "wide_resnet50_2", "wide_resnet101_2", as resnets with fpn backbones.</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">resnet_101_backbone</span> <span class="o">=</span> <span class="n">backbones</span><span class="o">.</span><span class="n">resnet_fpn</span><span class="o">.</span><span class="n">resnet101</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="k-default-codeblock">
+<div class="highlight"><pre><span></span><code>Downloading: &quot;https://download.pytorch.org/models/resnet101-5d3b4d8f.pth&quot; to /root/.cache/torch/checkpoints/resnet101-5d3b4d8f.pth
+
+HBox(children=(FloatProgress(value=0.0, max=178728960.0), HTML(value=&#39;&#39;)))
+</code></pre></div>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="n">resnet_152_backbone</span> <span class="o">=</span> <span class="n">backbones</span><span class="o">.</span><span class="n">resnet_fpn</span><span class="o">.</span><span class="n">resnet152</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="k-default-codeblock">
+<div class="highlight"><pre><span></span><code>Downloading: &quot;https://download.pytorch.org/models/resnet152-b121ed2d.pth&quot; to /root/.cache/torch/checkpoints/resnet152-b121ed2d.pth
+
+HBox(children=(FloatProgress(value=0.0, max=241530880.0), HTML(value=&#39;&#39;)))
+</code></pre></div>
+</div>
+
+<ul>
+<li>It supports backbones "resnet18", "resnet34", "resnet50","resnet101", "resnet152", "resnext101_32x8d", "mobilenet", "vgg11", "vgg13", "vgg16", "vgg19", without fpn networks</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">vgg11_backbone</span> <span class="o">=</span> <span class="n">backbones</span><span class="o">.</span><span class="n">vgg</span><span class="o">.</span><span class="n">vgg11</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="k-default-codeblock">
+<div class="highlight"><pre><span></span><code>Downloading: &quot;https://download.pytorch.org/models/vgg11-bbd30ac9.pth&quot; to /root/.cache/torch/checkpoints/vgg11-bbd30ac9.pth
+
+HBox(children=(FloatProgress(value=0.0, max=531456000.0), HTML(value=&#39;&#39;)))
+</code></pre></div>
+</div>
+
+<h2 id="mantisshrimp-engines">Mantisshrimp Engines</h2>
+<ul>
+<li>
+<p>Now engine enters the picture.</p>
+</li>
+<li>
+<p>We provide out of box support to train with Fastai and PyTorch Lightning.</p>
+</li>
+<li>
+<p>You can use any one, at end of the day both remain PyTorch models.</p>
+</li>
+</ul>
+<h2 id="training-using-fastai">Training Using Fastai</h2>
+<ul>
+<li>We provide support for COCO Metrics too, very useful while training</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># metrics = []</span>
+<span class="c1"># metrics += [COCOMetric(valid_rs, bbox=True, mask=False, keypoint=False)]</span>
+</code></pre></div>
+
+<h2 id="dataloader">DataLoader</h2>
+<ul>
+<li>Another feature is that all mantis models have a <code>dataloader</code> method that returns a customized <code>DataLoader</code> for each model.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">train_dl</span> <span class="o">=</span> <span class="n">faster_rcnn</span><span class="o">.</span><span class="n">dataloaders</span><span class="o">.</span><span class="n">train_dataloader</span><span class="p">(</span><span class="n">train_ds</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">valid_dl</span> <span class="o">=</span> <span class="n">faster_rcnn</span><span class="o">.</span><span class="n">dataloaders</span><span class="o">.</span><span class="n">valid_dataloader</span><span class="p">(</span><span class="n">valid_ds</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># This creates the default model with resnet50 fpn backbone</span>
+<span class="c1"># model = faster_rcnn.model(num_classes=2)</span>
+
+<span class="c1"># To create model with backbones </span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">faster_rcnn</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">backbone</span><span class="o">=</span><span class="n">resnet_152_backbone</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">learner</span> <span class="o">=</span> <span class="n">faster_rcnn</span><span class="o">.</span><span class="n">fastai</span><span class="o">.</span><span class="n">learner</span><span class="p">([</span><span class="n">train_dl</span><span class="p">,</span> <span class="n">valid_dl</span><span class="p">],</span> <span class="n">model</span><span class="p">)</span>
+</code></pre></div>
+
+<p><div class="highlight"><pre><span></span><code><span class="n">learner</span><span class="o">.</span><span class="n">fine_tune</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+</code></pre></div>
+<div class="k-default-codeblock">
+<div class="highlight"><pre><span></span><code>/opt/conda/lib/python3.7/site-packages/fastai2/callback/core.py:29: UserWarning: You are setting an attribute (loss) that also exists in the learner. Please be advised that you&#39;re not setting it in the learner but in the callback. Use `self.learn.loss` if you would like to change it in the learner.
+  warn(f&quot;You are setting an attribute ({name}) that also exists in the learner. Please be advised that you&#39;re not setting it in the learner but in the callback. Use `self.learn.{name}` if you would like to change it in the learner.&quot;)
+</code></pre></div>
+</div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>1.262132</td>
+      <td>1.240003</td>
+      <td>10:35</td>
+    </tr>
+  </tbody>
+</table></p>
+<div class="k-default-codeblock">
+<div class="highlight"><pre><span></span><code>/opt/conda/conda-bld/pytorch_1587428398394/work/torch/csrc/utils/python_arg_parser.cpp:756: UserWarning: This overload of nonzero is deprecated:
+    nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+    nonzero(Tensor input, *, bool as_tuple)
+</code></pre></div>
+</div>
+
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>0.682398</td>
+      <td>0.660053</td>
+      <td>18:55</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.576909</td>
+      <td>0.555283</td>
+      <td>18:53</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="training-using-pytorch-lightning">Training using PyTorch Lightning</h2>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">LightModel</span><span class="p">(</span><span class="n">faster_rcnn</span><span class="o">.</span><span class="n">lightning</span><span class="o">.</span><span class="n">ModelAdapter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">configure_optimizers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">opt</span> <span class="o">=</span> <span class="n">SGD</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="mf">2e-4</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">opt</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">=</span> <span class="n">faster_rcnn</span><span class="o">.</span><span class="n">model</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">backbone</span><span class="o">=</span><span class="n">resnet_152_backbone</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">light_model</span> <span class="o">=</span> <span class="n">LightModel</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span> <span class="c1">#metrics=metrics)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pytorch_lightning</span> <span class="kn">import</span> <span class="n">Trainer</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span><span class="n">max_epochs</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">gpus</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">light_model</span><span class="p">,</span> <span class="n">train_dl</span><span class="p">,</span> <span class="n">valid_dl</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="k-default-codeblock">
+<div class="highlight"><pre><span></span><code>GPU available: True, used: True
+TPU available: False, using: 0 TPU cores
+CUDA_VISIBLE_DEVICES: [0]
+</code></pre></div>
+</div>
+
+<div class="k-default-codeblock">
+<div class="highlight"><pre><span></span><code>  | Name  | Type       | Params
+-------------------------------------
+0 | model | FasterRCNN | 75 M  
+
+HBox(children=(FloatProgress(value=1.0, bar_style=&#39;info&#39;, description=&#39;Validation sanity check&#39;, layout=Layout…
+
+/opt/conda/conda-bld/pytorch_1587428398394/work/torch/csrc/utils/python_arg_parser.cpp:756: UserWarning: This overload of nonzero is deprecated:
+    nonzero(Tensor input, *, Tensor out)
+Consider using one of the following signatures instead:
+    nonzero(Tensor input, *, bool as_tuple)
+
+HBox(children=(FloatProgress(value=1.0, bar_style=&#39;info&#39;, description=&#39;Training&#39;, layout=Layout(flex=&#39;2&#39;), max…
+
+HBox(children=(FloatProgress(value=1.0, bar_style=&#39;info&#39;, description=&#39;Validating&#39;, layout=Layout(flex=&#39;2&#39;), m…
+
+HBox(children=(FloatProgress(value=1.0, bar_style=&#39;info&#39;, description=&#39;Validating&#39;, layout=Layout(flex=&#39;2&#39;), m…
+</code></pre></div>
+</div>
+
+<div class="k-default-codeblock">
+<div class="highlight"><pre><span></span><code>1
+</code></pre></div>
+</div>
+
+<h2 id="saving-the-model">Saving the Model</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Save the model as same as you would do for a Pytorch model</span>
+<span class="c1"># You can also use lightning features to even automate this.</span>
+
+<span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">light_model</span><span class="o">.</span><span class="n">state_dict</span><span class="p">(),</span> <span class="s2">&quot;mantiss_faster_rcnn.pt&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="making-predictions">Making Predictions</h2>
+<div class="highlight"><pre><span></span><code><span class="n">detection_threshold</span> <span class="o">=</span> <span class="mf">0.45</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">format_prediction_string</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="n">scores</span><span class="p">):</span>
+    <span class="n">pred_strings</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">boxes</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)):</span>
+        <span class="n">pred_strings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">b</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pred_strings</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Just using the Fastai model for now. You can replace this with Light model as well.</span>
+<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">detection_threshold</span> <span class="o">=</span> <span class="mf">1e-8</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">device</span> <span class="o">=</span> <span class="s1">&#39;cuda&#39;</span>
+<span class="k">for</span> <span class="n">images</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;../input/global-wheat-detection/test/&quot;</span><span class="p">):</span>
+    <span class="n">image_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;../input/global-wheat-detection/test/&quot;</span><span class="p">,</span> <span class="n">images</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span> <span class="o">/</span> <span class="mf">255.</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">model</span>
+<span class="c1">#     print(image.shape)</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="c1">#     print(outputs)</span>
+
+    <span class="n">boxes</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;boxes&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;scores&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+
+    <span class="n">boxes</span> <span class="o">=</span> <span class="n">boxes</span><span class="p">[</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="n">detection_threshold</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span><span class="p">[</span><span class="n">scores</span> <span class="o">&gt;=</span> <span class="n">detection_threshold</span><span class="p">]</span>
+    <span class="n">image_id</span> <span class="o">=</span> <span class="n">images</span><span class="p">[:</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;image_id&#39;</span><span class="p">:</span> <span class="n">image_id</span><span class="p">,</span>
+        <span class="s1">&#39;PredictionString&#39;</span><span class="p">:</span> <span class="n">format_prediction_string</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="c1">#     break</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="n">test_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;image_id&#39;</span><span class="p">,</span> <span class="s1">&#39;PredictionString&#39;</span><span class="p">])</span>
+<span class="n">test_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+<div class="k-default-codeblock">
+<div class="highlight"><pre><span></span><code>.dataframe tbody tr th {
+    vertical-align: top;
+}
+
+.dataframe thead th {
+    text-align: right;
+}
+</code></pre></div>
+</div>
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>image_id</th>
+      <th>PredictionString</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>796707dd7.</td>
+      <td>0.9835 892 326 108 95 0.9809 702 824 111 105 0.9749 499 780 102 102 0.9732 0 445 68 90 0.9714 349 0 83 61 0.9678 939 66 82 111 0.9501 134 545 138 110 0.9491 675 709 82 100 0.9306 611 34 100 83 0.9283 103 792 100 88 0.9190 44 89 170 106 0.9069 249 474 93 106 0.9055 674 27 126 129 0.8951 680 448 101 154 0.8831 374 621 99 140 0.8831 461 269 122 103 0.8787 220 835 122 82 0.8770 426 185 83 89 0.8714 246 322 82 161 0.8611 301 275 88 125 0.8575 663 559 122 151 0.8444 801 530 135 154 0.8337 235 0 113 47 0.8137 388 619 82 79 0.7730 214 675 91 82 0.6770 194 471 81 77 0.6689 592 490 79 77 0.6685 59 5...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>cc3532ff6.</td>
+      <td>0.9866 369 0 97 106 0.9841 911 125 106 92 0.9761 606 423 94 106 0.9742 489 568 100 149 0.9719 258 631 107 179 0.9694 689 471 151 93 0.9693 470 395 124 162 0.9675 716 294 118 95 0.9632 552 826 96 100 0.9520 33 342 98 73 0.9487 306 286 92 87 0.9417 96 609 86 151 0.9375 401 206 87 88 0.9368 755 829 182 176 0.9332 0 418 164 99 0.9327 779 696 111 108 0.9302 72 816 138 162 0.9267 952 1 72 86 0.9106 564 299 104 112 0.8850 769 2 101 128 0.8816 14 657 104 71 0.7850 6 475 73 78 0.7729 26 644 173 87 0.7387 10 363 133 179 0.7025 583 889 103 112 0.6457 0 769 43 71 0.6198 291 839 101 66 0.5801 10 404 84...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>51f1be19e.</td>
+      <td>0.9569 18 0 99 68 0.9546 274 464 155 134 0.9402 765 886 140 100 0.9393 636 793 111 76 0.9368 194 917 107 101 0.9321 688 914 98 84 0.9262 835 338 136 119 0.9229 600 95 153 166 0.9224 811 84 108 75 0.9153 815 757 91 86 0.9068 325 141 142 138 0.8867 902 693 105 82 0.8552 669 595 104 84 0.8491 240 117 88 119 0.8478 492 487 111 85 0.8331 860 271 104 204 0.8250 69 692 91 84 0.8121 563 588 113 128 0.7668 485 477 202 92 0.7495 0 379 49 106 0.6596 527 970 91 54 0.6227 534 462 178 89 0.5940 46 520 70 80 0.5751 659 428 83 72 0.5720 775 24 102 65 0.5616 74 684 82 165 0.5557 850 276 117 104 0.4984 120 ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>51b3e36ab.</td>
+      <td>0.9824 361 151 110 106 0.9809 471 577 88 85 0.9798 499 190 102 81 0.9786 0 901 86 121 0.9712 231 635 98 180 0.9694 420 925 88 99 0.9683 12 823 90 98 0.9578 440 323 150 97 0.9573 856 711 82 81 0.9540 377 424 108 82 0.9531 874 185 131 80 0.9519 462 4 87 164 0.9514 873 287 151 136 0.9464 329 466 91 152 0.9425 600 762 171 115 0.9412 113 848 143 90 0.9127 755 817 208 122 0.9046 534 29 271 129 0.8943 503 394 120 93 0.8894 11 435 82 213 0.8806 822 455 199 155 0.8713 609 374 174 95 0.8594 6 0 79 172 0.7965 7 580 87 188 0.7126 707 670 157 80 0.6970 1 412 103 365 0.5088 448 320 173 162 0.4831 553 24...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>f5a1f0358.</td>
+      <td>0.9833 543 401 84 96 0.9782 683 197 122 101 0.9779 411 168 68 74 0.9767 63 457 136 119 0.9727 258 657 95 82 0.9725 659 104 88 92 0.9723 596 723 109 93 0.9701 224 317 124 99 0.9700 815 404 100 99 0.9684 1 831 65 131 0.9676 297 455 155 103 0.9672 881 628 97 168 0.9626 153 243 69 83 0.9616 149 758 163 123 0.9600 126 612 72 79 0.9447 224 558 80 92 0.9405 299 568 76 80 0.9387 2 5 64 66 0.9322 541 277 108 113 0.9281 692 564 85 135 0.9183 527 0 110 105 0.9134 405 677 84 123 0.9094 949 440 75 192 0.8918 87 818 67 75 0.8481 470 796 135 87 0.8111 459 314 85 156 0.6798 783 578 86 97 0.5494 459 575 56...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../custom_parser/" title="Custom Parser" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Custom Parser
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../examples/training_using_fastai/" title="Training using Fastai" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Training using Fastai
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.92ffa368.min.js"></script>
+      <script src="../assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.a68abb33.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="https://unpkg.com/mermaid@8.4.4/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
